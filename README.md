@@ -15,6 +15,35 @@ gvenzl/oracle-free:23-slim
 docker exec -i oracle-free sqlplus POCUSER/POCUSER@localhost/FREEPDB1 < src/test/resources/init-db/ddl.sql
 ```
 
+## Avvio servizi
+
+Avvio database Oracle : 
+
+```bash
+docker start oracle-free
+```
+
+Avvio Quarkus
+
+```bash
+mvn quarkus:dev
+```
+
+## Benchmark
+
+Tabelle classica
+
+```bash
+h2load -n100000 -c 20 -m 20 http://localhost:8080/poc-table/insert-normal
+```
+
+Tabelle blockchain
+
+```bash
+h2load -n100000 -c 20 -m 20 http://localhost:8080/poc-table/insert-blockchain
+```
+
+
 ## Quarkus original README
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
