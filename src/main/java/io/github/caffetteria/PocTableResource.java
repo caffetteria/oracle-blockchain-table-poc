@@ -9,6 +9,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.UUID;
@@ -16,6 +18,8 @@ import java.util.UUID;
 @ApplicationScoped
 @Path( "/poc-table" )
 public class PocTableResource {
+
+    private static final Logger LOG = LoggerFactory.getLogger(PocTableResource.class);
 
     @Inject
     EntityManager em;
@@ -34,6 +38,7 @@ public class PocTableResource {
         NormalTable normalTable = new NormalTable();
         this.popola( normalTable );
         em.persist( normalTable );
+        LOG.info( "Record classico inserito {}", normalTable.getId() );
         return normalTable.getId();
     }
 
@@ -44,6 +49,7 @@ public class PocTableResource {
         BlockchainTable blockchainTable = new BlockchainTable();
         this.popola( blockchainTable );
         em.persist( blockchainTable );
+        LOG.info( "Record blockchain inserito {}", blockchainTable.getId() );
         return blockchainTable.getId();
     }
 
