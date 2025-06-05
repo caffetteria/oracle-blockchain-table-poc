@@ -1,5 +1,22 @@
 # oracle-blockchain-table-poc
 
+## Inizializzazione base dati 
+
+```bash
+docker run --name oracle-free \
+-e APP_USER=POCUSER \
+-e APP_USER_PASSWORD=POCUSER \
+-e ORACLE_RANDOM_PASSWORD=yes \
+-p 1521:1521 \
+gvenzl/oracle-free:23-slim
+```
+
+```bash
+docker exec -i oracle-free sqlplus POCUSER/POCUSER@localhost/FREEPDB1 < src/test/resources/init-db/ddl.sql
+```
+
+## Quarkus original README
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
